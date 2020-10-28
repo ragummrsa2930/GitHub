@@ -5,4 +5,5 @@ data class GitHubModel(
     val number: Int,
     val state: String,
     val created_at: String
+
 )

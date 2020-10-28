@@ -14,9 +14,9 @@ class GitHubViewModel : ViewModel() {
     val TAG = GitHubViewModel::class.java.simpleName
     var error = MutableLiveData<String>()
     var responseModel = MutableLiveData<List<GitHubModel>>()
-    fun getPRDetails(userName: String, repoName: String) {
+    fun getPRDetails(userName: String, repoName: String, page: Int) {
         val api = ApiClient.getClient().create(GitHubApi::class.java)
-        api.getPRDetails(userName, repoName)
+        api.getPRDetails(userName, repoName, page, 10)
            .enqueue(object : Callback<List<GitHubModel>> {
                 override fun onFailure(call: Call<List<GitHubModel>>, t: Throwable) {
                    error.value = t.message

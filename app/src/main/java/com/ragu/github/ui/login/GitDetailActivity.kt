@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lcldost.partnerapp.adapter.AdapterItem
@@ -61,13 +62,14 @@ class GitDetailActivity : AppCompatActivity(), AdapterItem.OnLoadMoreListener {
         })
 
         gitHubViewModel.error.observe(this@GitDetailActivity, Observer {
-
+            Toast.makeText(this, it, Toast.LENGTH_SHORT)
         })
 
-        gitHubViewModel.getPRDetails(intent.getStringExtra("name")!!, intent.getStringExtra("repo")!!)
+        gitHubViewModel.getPRDetails(intent.getStringExtra("name")!!, intent.getStringExtra("repo")!!, page)
     }
 
     override fun onLoadMore() {
-
+        page += page
+        gitHubViewModel.getPRDetails(intent.getStringExtra("name")!!, intent.getStringExtra("repo")!!, page)
     }
 }
